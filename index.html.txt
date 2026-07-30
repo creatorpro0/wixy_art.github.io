@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050912">
+<meta name="description" content="Wixy — digital artist portfolio">
+<title>WIXY — Digital Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Unbounded:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#050912;--surface:#0a1020;--surface2:#0d1528;--text:#f5f7ff;--muted:#8e99b5;
+ --blue:#3d6cff;--cyan:#63c7ff;--line:rgba(255,255,255,.09);--glass:rgba(8,14,28,.72);
+ --shadow:0 24px 80px rgba(0,0,0,.35);--radius:18px;
+}
+html[data-theme="light"]{
+ --bg:#f4f7fc;--surface:#fff;--surface2:#edf2fa;--text:#101729;--muted:#647089;
+ --line:rgba(16,23,41,.11);--glass:rgba(255,255,255,.78);--shadow:0 24px 70px rgba(32,55,90,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;font-weight:400;overflow-x:hidden;transition:background .35s,color .35s}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:
+ radial-gradient(55% 45% at 18% 8%,rgba(61,108,255,.18),transparent 70%),
+ radial-gradient(45% 45% at 82% 72%,rgba(28,125,220,.12),transparent 70%),
+ linear-gradient(135deg,var(--bg),#07152b 55%,var(--bg));}
+html[data-theme="light"] body:before{opacity:.42}
+::selection{background:var(--blue);color:#fff}
+button,input,textarea,select{font:inherit}
+button{color:inherit}
+a{color:inherit}
+h1,h2,h3,h4,.display,.logo{font-family:Unbounded,sans-serif}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:9999;box-shadow:0 0 18px rgba(99,199,255,.55)}
+nav{position:fixed;inset:0 0 auto;z-index:100;padding:18px 5vw;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,var(--glass),transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.logo{font-size:19px;font-weight:800;letter-spacing:-.04em;cursor:pointer;user-select:none}
+.logo:after{content:".";color:var(--cyan)}
+.nav-right{display:flex;align-items:center;gap:18px}.nav-links{display:flex;gap:30px}
+.nav-links a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:.25s}
+.nav-links a:hover{color:var(--text)}
+.nav-actions{display:flex;gap:8px}
+.icon-btn,.btn{border:1px solid var(--line);background:rgba(255,255,255,.025);cursor:pointer;transition:transform .22s,border-color .22s,background .22s,box-shadow .22s}
+.icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.icon-btn:hover,.btn:hover{transform:translateY(-2px);border-color:rgba(99,199,255,.55);box-shadow:0 0 25px rgba(61,108,255,.15)}
+.btn{padding:12px 18px;border-radius:12px;font-size:13px}
+.btn-primary{background:linear-gradient(135deg,var(--blue),#2d8cff);border-color:transparent;color:white}
+.btn-danger{border-color:rgba(255,80,100,.3);color:#ff8c9b}
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:100px 5vw 70px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;inset:-20%;background:
+ radial-gradient(35% 30% at 28% 35%,rgba(61,108,255,.35),transparent 70%),
+ radial-gradient(30% 35% at 74% 62%,rgba(50,150,255,.17),transparent 70%);
+filter:blur(30px);animation:drift 15s ease-in-out infinite alternate;z-index:-1}
+@keyframes drift{to{transform:translate3d(-2%,2%,0) scale(1.08)}}
+.hero-inner{max-width:1100px}.eyebrow,.kicker{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--cyan)}
+.hero h1{font-size:clamp(64px,15vw,185px);line-height:.88;margin:20px 0 25px;font-weight:900;letter-spacing:-.075em;background:linear-gradient(180deg,#fff,#cbd6f1 48%,#7182ad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:620px;margin:0 auto;color:var(--muted);line-height:1.8;font-size:16px}
+.hero-cta{display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap}
+.scroll-cue{margin-top:65px;color:var(--muted);font-size:10px;letter-spacing:.25em;text-transform:uppercase}.scroll-line{height:38px;width:1px;margin:10px auto 0;background:linear-gradient(var(--cyan),transparent);animation:pulseLine 1.8s infinite}
+@keyframes pulseLine{50%{transform:scaleY(.45);opacity:.45}}
+.section{padding:125px 5vw;max-width:1500px;margin:auto}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:48px}.section-head h2{font-size:clamp(32px,5vw,58px);margin:12px 0 0}.desc{max-width:390px;color:var(--muted);line-height:1.75;font-size:14px}
+.reveal{opacity:0;transform:translateY(28px);transition:.8s cubic-bezier(.2,.7,.2,1)}.reveal.is-visible{opacity:1;transform:none}
+.masonry{columns:1 260px;column-gap:20px}.art-card{break-inside:avoid;margin:0 0 20px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface);position:relative;cursor:pointer;transition:.45s cubic-bezier(.2,.7,.2,1);box-shadow:0 10px 35px rgba(0,0,0,.08)}
+.art-card:hover{transform:translateY(-7px);border-color:rgba(99,199,255,.4);box-shadow:0 22px 65px rgba(25,80,170,.16)}
+.media-wrap{position:relative;overflow:hidden}.art-card img,.art-card video{display:block;width:100%;height:auto;filter:grayscale(.75) brightness(.86);transition:1s cubic-bezier(.2,.7,.2,1);background:#080d19}.art-card:hover img,.art-card:hover video{filter:none;transform:scale(1.045)}
+.overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:end;padding:20px;background:linear-gradient(transparent 35%,rgba(3,7,16,.9));opacity:.9}.overlay h3{font-size:16px;margin:4px 0 0}.tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}.type-badge{position:absolute;right:14px;top:14px;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:rgba(4,9,19,.58);border:1px solid var(--line);backdrop-filter:blur(8px)}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px}.about-text p{color:var(--muted);font-size:16px;line-height:1.95}.skills{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}.skill-pill{padding:9px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;transition:.25s}.skill-pill:hover{color:var(--text);border-color:var(--cyan)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.stat{padding:28px;background:var(--surface)}.stat .num{font:700 30px Unbounded}.stat .label{margin-top:7px;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.contact-cta{text-align:center;padding-bottom:80px}.contact-cta h2{font-size:clamp(35px,7vw,90px);line-height:1.05;margin:16px 0 24px}.email{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(99,199,255,.4);padding-bottom:5px}.socials{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;margin-top:40px}.socials a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}.socials a:hover{color:var(--text)}
+.comments-wrap{max-width:850px;margin:40px auto 0}.comment-form{display:grid;grid-template-columns:1fr auto;gap:10px}.comment-form textarea{min-height:52px;resize:vertical}.field{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--text);outline:none;transition:.25s}.field:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(61,108,255,.1)}.comments-list{display:grid;gap:10px;margin-top:18px}.comment{padding:15px;border:1px solid var(--line);border-radius:13px;background:var(--surface);display:flex;gap:12px}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:white;font-weight:700;flex:none}.comment strong{font-size:13px}.comment p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.6}.comment small{color:var(--muted);font-size:10px}
+.interactions{display:flex;justify-content:center;gap:10px;margin:35px 0}.like-btn.liked{border-color:#ff6681;color:#ff6681;background:rgba(255,90,120,.08)}.like-count{font-variant-numeric:tabular-nums}
+footer{border-top:1px solid var(--line);padding:28px 5vw;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:11px}
+.modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(2,5,12,.78);backdrop-filter:blur(14px)}.modal.open{display:flex;animation:fade .25s}.modal-card{width:min(760px,100%);max-height:90vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow);animation:pop .3s cubic-bezier(.2,.8,.2,1)}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.modal-top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:20px}.modal-top h2{font-size:21px;margin:0}.muted{color:var(--muted);font-size:12px}
+.share-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.share-options .btn{width:100%}
+.lightbox{background:rgba(2,5,12,.95)}.lightbox-inner{width:min(1100px,100%);text-align:center}.lightbox-media{max-height:72vh;display:grid;place-items:center}.lightbox-media img,.lightbox-media video{max-width:100%;max-height:72vh;border-radius:14px;object-fit:contain}.lightbox-meta h3{font-size:22px;margin:20px 0 8px}.lightbox-meta p{color:var(--muted);max-width:600px;margin:auto;line-height:1.7}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--glass);cursor:pointer}.lb-prev{left:24px}.lb-next{right:24px}
+.admin-panel{width:min(1000px,100%);max-height:92vh;overflow:auto}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-row{margin-bottom:14px}.form-row label{display:block;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}.form-row textarea{min-height:90px}.admin-section{border-top:1px solid var(--line);padding-top:22px;margin-top:22px}.admin-section h3{font-size:14px;margin:0 0 15px}.analytics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{background:var(--surface2);border:1px solid var(--line);padding:18px;border-radius:14px}.metric b{display:block;font:700 23px Unbounded}.metric span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}.admin-list{display:grid;gap:9px}.admin-item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px}.admin-item .info{flex:1;min-width:0}.admin-item h4{font:500 12px Inter;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.admin-item p{font-size:10px;color:var(--muted);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.admin-item img,.admin-item video{width:50px;height:50px;object-fit:cover;border-radius:8px}.actions{display:flex;gap:6px}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:1000;background:var(--text);color:var(--bg);padding:11px 18px;border-radius:999px;font-size:12px;transition:.3s;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translate(-50%,0)}
+.login-card{width:min(420px,100%);text-align:center}.login-card .lock{font-size:34px;margin-bottom:12px}.login-card h2{font-size:22px}.login-card p{color:var(--muted);font-size:12px;line-height:1.6}.login-card .form-row{text-align:left}
+.hidden{display:none!important}
+@media(max-width:850px){.nav-links{display:none}.about-grid{grid-template-columns:1fr}.section{padding:90px 5vw}.section-head{align-items:start;flex-direction:column}.admin-grid{grid-template-columns:1fr}}
+@media(max-width:560px){nav{padding:15px 4vw}.nav-actions{gap:5px}.hero{padding-inline:6vw}.hero p{font-size:14px}.comment-form{grid-template-columns:1fr}.share-options{grid-template-columns:1fr}.analytics{grid-template-columns:1fr}.lb-nav{width:38px;height:38px}.lb-prev{left:8px}.lb-next{right:8px}.modal-card{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="logo" id="logoTrigger" title="WIXY">wixy</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
+      <button class="btn btn-primary" id="loginBtn">Sign in</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">Digital Artist &amp; Visual Storyteller</span>
+    <h1 id="heroTitle">WIXY</h1>
+    <p id="heroSubtitle">Crafting immersive digital worlds where color, motion and emotion collide. Based everywhere, working anywhere.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work" id="exploreBtn">Explore the work</a>
+      <button class="btn" id="shareHero">Share portfolio</button>
+    </div>
+    <div class="scroll-cue">Scroll<div class="scroll-line"></div></div>
+  </div>
+</header>
+
+<section class="section" id="work">
+  <div class="section-head reveal">
+    <div><span class="kicker">Selected Work</span><h2>The Gallery</h2></div>
+    <p class="desc">A curated collection of digital paintings, motion pieces and experimental visuals. Hover to bring the color to life.</p>
+  </div>
+  <div class="masonry reveal" id="galleryGrid"></div>
+  <div class="interactions">
+    <button class="btn like-btn" id="likeBtn">♥ <span class="like-count" id="likeCount">0</span></button>
+    <button class="btn" id="shareBtn">↗ Share</button>
+  </div>
+  <div class="comments-wrap">
+    <div class="section-head" style="margin-bottom:18px"><div><span class="kicker">Community</span><h2 style="font-size:25px">Comments</h2></div></div>
+    <div class="comment-form">
+      <textarea class="field" id="commentInput" placeholder="Write a comment..." maxlength="500"></textarea>
+      <button class="btn btn-primary" id="commentBtn">Post comment</button>
+    </div>
+    <div class="comments-list" id="commentsList"></div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="section-head reveal"><div><span class="kicker">About</span><h2>The Artist</h2></div></div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>wixy is a digital artist exploring the space between chaos and precision — where saturated color, glitch and light merge into something that feels alive. Every piece begins as a fragment of a mood, then grows into a fully realized world.</p>
+      <p>Over the past few years, wixy's work has moved from personal experiments into full visual identities, album art, and motion pieces for artists and brands who want something that doesn't look like anyone else's.</p>
+      <div class="skills"><span class="skill-pill">Digital Painting</span><span class="skill-pill">3D &amp; Motion</span><span class="skill-pill">Concept Art</span><span class="skill-pill">Album Art</span><span class="skill-pill">Visual Identity</span></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">80+</div><div class="label">Artworks</div></div><div class="stat"><div class="num">32</div><div class="label">Clients</div></div>
+      <div class="stat"><div class="num">6</div><div class="label">Years Active</div></div><div class="stat"><div class="num">12</div><div class="label">Exhibitions</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact-cta reveal" id="contact">
+  <span class="kicker">Get In Touch</span><h2>Let's create<br>something bold.</h2>
+  <a class="email" id="emailLink" href="mailto:hello@wixy.art">hello@wixy.art</a>
+  <div class="socials" id="socials"></div>
+</section>
+<footer><span>© <span id="year"></span> wixy. All rights reserved.</span><span>Crafted in the dark, released in color.</span></footer>
+
+<!-- Lightbox -->
+<div class="modal lightbox" id="lightbox">
+  <button class="icon-btn" style="position:absolute;top:22px;right:4vw" id="lbClose">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev">‹</button><button class="lb-nav lb-next" id="lbNext">›</button>
+  <div class="lightbox-inner"><div class="lightbox-media" id="lbMedia"></div><div class="lightbox-meta"><h3 id="lbTitle"></h3><p id="lbDesc"></p></div></div>
+</div>
+
+<!-- Share -->
+<div class="modal" id="shareModal">
+ <div class="modal-card" style="max-width:470px">
+  <div class="modal-top"><div><h2>Share portfolio</h2><div class="muted">Send this page anywhere.</div></div><button class="icon-btn modal-close">✕</button></div>
+  <div class="share-options"><button class="btn" id="copyLink">Copy link</button><button class="btn" id="nativeShare">Quick share</button></div>
+ </div>
+</div>
+
+<!-- Sign-in simulation -->
+<div class="modal" id="signinModal">
+ <div class="modal-card login-card">
+  <div class="modal-top"><span></span><button class="icon-btn modal-close">✕</button></div>
+  <div class="lock">◉</div><h2>Continue with Google</h2><p>This is a front-end sign-in simulation. No real Google account data is collected.</p>
+  <button class="btn btn-primary" id="googleSim" style="width:100%;margin-top:12px">G Continue with Google</button>
+ </div>
+</div>
+
+<!-- Secret login -->
+<div class="modal" id="secretLogin">
+ <div class="modal-card login-card">
+  <div class="lock">⌁</div><h2>Control Access</h2><p>Five logo taps unlocked the private control panel.</p>
+  <div class="form-row"><label>Username</label><input class="field" id="adminUser" autocomplete="username"></div>
+  <div class="form-row"><label>Password</label><input class="field" id="adminPass" type="password" autocomplete="current-password"></div>
+  <button class="btn btn-primary" id="adminLogin" style="width:100%">Unlock panel</button>
+ </div>
+</div>
+
+<!-- Admin -->
+<div class="modal" id="adminModal">
+ <div class="modal-card admin-panel">
+  <div class="modal-top"><div><h2>WIXY Control Panel</h2><div class="muted">Local browser management • changes persist after refresh</div></div><button class="icon-btn" id="adminClose">✕</button></div>
+  <div class="analytics">
+   <div class="metric"><b id="visitsMetric">0</b><span>Visits</span></div><div class="metric"><b id="likesMetric">0</b><span>Likes</span></div><div class="metric"><b id="interactionsMetric">0</b><span>Interactions</span></div>
+  </div>
+
+  <div class="admin-section">
+   <h3>Homepage content</h3>
+   <div class="form-row"><label>Hero title</label><input class="field" id="adminTitle"></div>
+   <div class="form-row"><label>Hero subtitle</label><textarea class="field" id="adminSubtitle"></textarea></div>
+   <button class="btn btn-primary" id="saveContent">Save content</button>
+  </div>
+
+  <div class="admin-section">
+   <h3>Contact &amp; social links</h3>
+   <div class="admin-grid">
+    <div class="form-row"><label>Official email</label><input class="field" id="adminEmail" type="email"></div>
+    <div class="form-row"><label>Instagram URL</label><input class="field" id="socialInstagram"></div>
+    <div class="form-row"><label>Behance URL</label><input class="field" id="socialBehance"></div>
+    <div class="form-row"><label>ArtStation URL</label><input class="field" id="socialArtstation"></div>
+    <div class="form-row"><label>Twitter / X URL</label><input class="field" id="socialTwitter"></div>
+   </div>
+   <button class="btn btn-primary" id="saveLinks">Save contact &amp; links</button>
+  </div>
+
+  <div class="admin-section">
+   <h3>Artwork manager</h3>
+   <form id="artForm">
+    <input type="hidden" id="editId">
+    <div class="admin-grid">
+     <div class="form-row"><label>Media type</label><select class="field" id="fieldType"><option value="image">Image</option><option value="video">Video</option></select></div>
+     <div class="form-row"><label>Media URL</label><input class="field" id="fieldUrl" required placeholder="https://..."></div>
+    </div>
+    <div class="form-row"><label>Title</label><input class="field" id="fieldTitle" required></div>
+    <div class="form-row"><label>Description</label><textarea class="field" id="fieldDesc"></textarea></div>
+    <button class="btn btn-primary" id="submitBtn" type="submit">Add artwork</button>
+    <button class="btn" id="cancelEdit" type="button" style="display:none">Cancel</button>
+   </form>
+   <div class="admin-list" id="adminList"></div>
+  </div>
+
+  <div class="admin-section">
+   <h3>Comment management</h3><div class="admin-list" id="adminComments"></div>
+  </div>
+  <div class="admin-section" style="display:flex;justify-content:flex-end"><button class="btn btn-danger" id="logoutBtn">Log out &amp; lock panel</button></div>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/* ---------------- Data ---------------- */
+const KEYS={art:"wixy_artworks_v2",settings:"wixy_settings_v2",comments:"wixy_comments_v2",likes:"wixy_likes_v2",stats:"wixy_stats_v2",theme:"wixy_theme_v2"};
+const DEFAULT_ARTWORKS=[
+{id:"a1",type:"image",url:"https://picsum.photos/seed/wixy01/700/900",title:"Neon Bloom",description:"A study in saturated color against deep shadow, exploring how light fractures across digital petals."},
+{id:"a2",type:"image",url:"https://picsum.photos/seed/wixy02/700/560",title:"Glass Horizon",description:"An abstract landscape built from layered gradients and refracted geometry."},
+{id:"a3",type:"video",url:"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",title:"Bloom Motion Study",description:"A short looping motion piece exploring organic growth in digital space."},
+{id:"a4",type:"image",url:"https://picsum.photos/seed/wixy04/700/850",title:"Chromatic Drift",description:"Color fields in slow collision — a meditation on entropy and balance."},
+{id:"a5",type:"image",url:"https://picsum.photos/seed/wixy05/700/620",title:"Static Pulse",description:"Glitch aesthetics meet soft gradients in this experimental composition."},
+{id:"a6",type:"image",url:"https://picsum.photos/seed/wixy06/700/920",title:"Echo Chamber",description:"Recursive forms and mirrored symmetry, inspired by sound visualization."},
+{id:"a7",type:"image",url:"https://picsum.photos/seed/wixy07/700/700",title:"Midnight Circuit",description:"A portrait rendered through the lens of synthetic light."},
+{id:"a8",type:"image",url:"https://picsum.photos/seed/wixy08/700/880",title:"Vapor Field",description:"Atmospheric layers built from soft particle systems and deep blues."}
+];
+const DEFAULT_SETTINGS={title:"WIXY",subtitle:"Crafting immersive digital worlds where color, motion and emotion collide. Based everywhere, working anywhere.",email:"hello@wixy.art",socials:{Instagram:"#",Behance:"#",ArtStation:"#",Twitter:"#"}};
+let artworks=load(KEYS.art,DEFAULT_ARTWORKS), settings=load(KEYS.settings,DEFAULT_SETTINGS);
+let comments=load(KEYS.comments,[]), stats=load(KEYS.stats,{visits:0,interactions:0}), likes=Number(localStorage.getItem(KEYS.likes)||0);
+let liked=sessionStorage.getItem("wixy_liked")==="1", currentIdx=0, logoClicks=[];
+
+function load(key,fallback){try{const x=localStorage.getItem(key);return x?JSON.parse(x):JSON.parse(JSON.stringify(fallback))}catch{return JSON.parse(JSON.stringify(fallback))}}
+function save(key,val){try{localStorage.setItem(key,JSON.stringify(val))}catch{}}
+function esc(v){const d=document.createElement("div");d.textContent=v??"";return d.innerHTML}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove("show"),2300)}
+function interact(){stats.interactions++;save(KEYS.stats,stats);}
+
+document.getElementById("year").textContent=new Date().getFullYear();
+stats.visits++;save(KEYS.stats,stats);
+
+/* ---------------- Audio: Web Audio API ---------------- */
+let audioCtx;
+function ctx(){audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();return audioCtx}
+function tone(freq,dur,type="sine",gain=.035,when=0,slideTo=null){
+ try{const c=ctx(),o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime+when);if(slideTo)o.frequency.exponentialRampToValueAtTime(slideTo,c.currentTime+when+dur);g.gain.setValueAtTime(.0001,c.currentTime+when);g.gain.exponentialRampToValueAtTime(gain,c.currentTime+when+.008);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+when+dur);o.connect(g);g.connect(c.destination);o.start(c.currentTime+when);o.stop(c.currentTime+when+dur+.02)}catch{}}
+function snap(){tone(180+Math.random()*35,.055,"triangle",.025);tone(58+Math.random()*8,.09,"sine",.018,.005)}
+function whoosh(){tone(240,.22,"sine",.018,0,90)}
+function impact(){tone(160,.42,"sine",.055,0,25);tone(48,.28,"sine",.045,.03,25)}
+function success(){[523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,.16,"sine",.028,i*.075))}
+function errorSound(){tone(120,.18,"sawtooth",.028,0,72);tone(70,.18,"sine",.022,.02,45)}
+function likePop(){tone(95,.12,"sine",.03,0,65);tone(440,.09,"triangle",.02,.02,330)}
+document.addEventListener("click",e=>{if(e.target.closest("button,.btn,.logo,.socials a"))snap()},{passive:true});
+
+/* ---------------- Theme ---------------- */
+const theme=localStorage.getItem(KEYS.theme)||"dark";
+document.documentElement.dataset.theme=theme;
+document.getElementById("themeBtn").textContent=theme==="dark"?"☀":"☾";
+document.getElementById("themeBtn").onclick=()=>{const next=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=next;localStorage.setItem(KEYS.theme,next);document.getElementById("themeBtn").textContent=next==="dark"?"☀":"☾";whoosh();interact()};
+
+/* ---------------- Scroll progress ---------------- */
+function progress(){const d=document.documentElement;document.getElementById("progress").style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100||0)+"%"}
+addEventListener("scroll",progress,{passive:true});progress();
+
+/* ---------------- Content ---------------- */
+function renderSettings(){
+ document.getElementById("heroTitle").textContent=settings.title;
+ document.getElementById("heroSubtitle").textContent=settings.subtitle;
+ const e=document.getElementById("emailLink");e.textContent=settings.email;e.href="mailto:"+settings.email;
+ const labels={Instagram:"Instagram",Behance:"Behance",ArtStation:"ArtStation",Twitter:"Twitter / X"};
+ document.getElementById("socials").innerHTML=Object.entries(labels).map(([k,v])=>`<a href="${esc(settings.socials[k]||"#")}" target="_blank" rel="noopener noreferrer">${v}</a>`).join("");
+}
+renderSettings();
+
+/* ---------------- Gallery ---------------- */
+const gallery=document.getElementById("galleryGrid");
+function media(item){return item.type==="video"?`<video src="${esc(item.url)}" muted loop playsinline preload="metadata"></video>`:`<img src="${esc(item.url)}" alt="${esc(item.title)}" loading="lazy">`}
+function renderGallery(){
+ if(!artworks.length){gallery.innerHTML='<div class="empty-state">No artworks yet.</div>';return}
+ gallery.innerHTML=artworks.map((x,i)=>`<article class="art-card" data-i="${i}"><div class="media-wrap">${media(x)}<div class="type-badge">${x.type==="video"?"▶":"◆"}</div><div class="overlay"><span class="tag">${x.type}</span><h3>${esc(x.title)}</h3></div></div></article>`).join("");
+ gallery.querySelectorAll(".art-card").forEach(card=>{
+   card.onclick=()=>{openLightbox(+card.dataset.i);interact()};
+   const v=card.querySelector("video"); if(v){card.addEventListener("mouseenter",()=>v.play().catch(()=>{}));card.addEventListener("mouseleave",()=>{v.pause();v.currentTime=0})}
+ });
+}
+renderGallery();
+
+/* ---------------- Lightbox ---------------- */
+const lb=document.getElementById("lightbox");
+function renderLB(){const x=artworks[currentIdx];if(!x)return;document.getElementById("lbMedia").innerHTML=x.type==="video"?`<video src="${esc(x.url)}" controls autoplay loop playsinline></video>`:`<img src="${esc(x.url)}" alt="${esc(x.title)}">`;document.getElementById("lbTitle").textContent=x.title;document.getElementById("lbDesc").textContent=x.description||""}
+function openLightbox(i){currentIdx=i;renderLB();lb.classList.add("open");whoosh()}
+function closeLightbox(){lb.classList.remove("open");document.getElementById("lbMedia").innerHTML="";whoosh()}
+document.getElementById("lbClose").onclick=closeLightbox;
+document.getElementById("lbPrev").onclick=()=>{currentIdx=(currentIdx-1+artworks.length)%artworks.length;renderLB();snap()};
+document.getElementById("lbNext").onclick=()=>{currentIdx=(currentIdx+1)%artworks.length;renderLB();snap()};
+lb.addEventListener("click",e=>{if(e.target===lb)closeLightbox()});
+
+/* ---------------- Like / share ---------------- */
+function renderLikes(){document.getElementById("likeCount").textContent=likes.toLocaleString();document.getElementById("likeBtn").classList.toggle("liked",liked)}
+renderLikes();
+document.getElementById("likeBtn").onclick=()=>{if(liked){liked=false;likes=Math.max(0,likes-1)}else{liked=true;likes++;likePop()}sessionStorage.setItem("wixy_liked",liked?"1":"0");localStorage.setItem(KEYS.likes,likes);renderLikes();interact();};
+function openShare(){document.getElementById("shareModal").classList.add("open");whoosh()}
+document.getElementById("shareBtn").onclick=openShare;document.getElementById("shareHero").onclick=openShare;
+document.getElementById("copyLink").onclick=async()=>{try{await navigator.clipboard.writeText(location.href);toast("Link copied");success()}catch{toast("Copy is unavailable in this browser")};interact()}
+document.getElementById("nativeShare").onclick=async()=>{if(navigator.share){try{await navigator.share({title:document.title,text:"WIXY — Digital Artist",url:location.href});success()}catch{}}else{toast("Quick share is not supported here")};interact()};
+
+/* ---------------- Comments ---------------- */
+function renderComments(){
+ const list=document.getElementById("commentsList");
+ list.innerHTML=comments.length?comments.slice().reverse().map(c=>`<div class="comment"><div class="avatar">${esc((c.name||"G")[0].toUpperCase())}</div><div><strong>${esc(c.name)}</strong> <small>• ${new Date(c.date).toLocaleString()}</small><p>${esc(c.text)}</p></div></div>`).join(""):'<div class="muted" style="text-align:center;padding:18px">Be the first to comment.</div>';
+}
+renderComments();
+document.getElementById("commentBtn").onclick=()=>{
+ const text=document.getElementById("commentInput").value.trim(); if(!text){toast("Write a comment first");return}
+ let name=localStorage.getItem("wixy_guest_name");if(!name){name=prompt("Choose a display name:","Guest");if(!name)return;name=name.trim().slice(0,40);if(!name)return;localStorage.setItem("wixy_guest_name",name)}
+ comments.push({id:crypto.randomUUID?crypto.randomUUID():"c"+Date.now(),name,text,date:Date.now()});save(KEYS.comments,comments);document.getElementById("commentInput").value="";renderComments();renderAdminComments();success();toast("Comment posted");interact();
+};
+
+/* ---------------- Sign-in simulation ---------------- */
+const signin=document.getElementById("signinModal");
+document.getElementById("loginBtn").onclick=()=>signin.classList.add("open");
+document.getElementById("googleSim").onclick=()=>{localStorage.setItem("wixy_signed_in","1");document.getElementById("loginBtn").textContent="Signed in";signin.classList.remove("open");success();toast("Signed in successfully");interact()};
+if(localStorage.getItem("wixy_signed_in")==="1")document.getElementById("loginBtn").textContent="Signed in";
+
+/* ---------------- Secret admin ---------------- */
+const secret=document.getElementById("secretLogin"), admin=document.getElementById("adminModal");
+document.getElementById("logoTrigger").onclick=()=>{
+ const now=Date.now();logoClicks.push(now);logoClicks=logoClicks.filter(t=>now-t<3000);
+ if(logoClicks.length>=5){logoClicks=[];secret.classList.add("open");impact();toast("Control panel unlocked")}
+};
+document.getElementById("adminLogin").onclick=()=>{
+ const u=document.getElementById("adminUser").value,p=document.getElementById("adminPass").value;
+ if(u==="Wixeko"&&p==="AOT"){secret.classList.remove("open");admin.classList.add("open");sessionStorage.setItem("wixy_admin","1");populateAdmin();success();toast("Login successful")}else{errorSound();toast("Incorrect username or password")}
+};
+function closeAdmin(){admin.classList.remove("open");sessionStorage.removeItem("wixy_admin");whoosh()}
+document.getElementById("adminClose").onclick=closeAdmin;document.getElementById("logoutBtn").onclick=closeAdmin;
+
+/* ---------------- Admin settings ---------------- */
+function populateAdmin(){
+ document.getElementById("visitsMetric").textContent=stats.visits.toLocaleString();document.getElementById("likesMetric").textContent=likes.toLocaleString();document.getElementById("interactionsMetric").textContent=stats.interactions.toLocaleString();
+ document.getElementById("adminTitle").value=settings.title;document.getElementById("adminSubtitle").value=settings.subtitle;document.getElementById("adminEmail").value=settings.email;
+ document.getElementById("socialInstagram").value=settings.socials.Instagram||"";document.getElementById("socialBehance").value=settings.socials.Behance||"";document.getElementById("socialArtstation").value=settings.socials.ArtStation||"";document.getElementById("socialTwitter").value=settings.socials.Twitter||"";
+ renderAdminList();renderAdminComments();
+}
+document.getElementById("saveContent").onclick=()=>{settings.title=document.getElementById("adminTitle").value.trim()||"WIXY";settings.subtitle=document.getElementById("adminSubtitle").value.trim();save(KEYS.settings,settings);renderSettings();success();toast("Homepage content saved");interact()};
+document.getElementById("saveLinks").onclick=()=>{settings.email=document.getElementById("adminEmail").value.trim()||"hello@wixy.art";settings.socials={Instagram:document.getElementById("socialInstagram").value.trim(),Behance:document.getElementById("socialBehance").value.trim(),ArtStation:document.getElementById("socialArtstation").value.trim(),Twitter:document.getElementById("socialTwitter").value.trim()};save(KEYS.settings,settings);renderSettings();success();toast("Contact links saved");interact()};
+
+/* Artwork CRUD */
+const artForm=document.getElementById("artForm");
+function resetForm(){artForm.reset();document.getElementById("editId").value="";document.getElementById("submitBtn").textContent="Add artwork";document.getElementById("cancelEdit").style.display="none"}
+artForm.onsubmit=e=>{e.preventDefault();const id=document.getElementById("editId").value,data={type:document.getElementById("fieldType").value,url:document.getElementById("fieldUrl").value.trim(),title:document.getElementById("fieldTitle").value.trim(),description:document.getElementById("fieldDesc").value.trim()};if(!data.url||!data.title)return toast("Title and URL are required");if(id){const i=artworks.findIndex(x=>x.id===id);if(i>=0)artworks[i]={...artworks[i],...data};toast("Artwork updated")}else{artworks.unshift({id:"a"+Date.now(),...data});toast("Artwork added")}save(KEYS.art,artworks);renderGallery();renderAdminList();resetForm();success();interact()};
+document.getElementById("cancelEdit").onclick=resetForm;
+function renderAdminList(){const list=document.getElementById("adminList");list.innerHTML=artworks.length?artworks.map(x=>`<div class="admin-item" data-id="${esc(x.id)}">${x.type==="video"?`<video src="${esc(x.url)}" muted></video>`:`<img src="${esc(x.url)}" alt="">`}<div class="info"><h4>${esc(x.title)}</h4><p>${esc(x.type)} • ${esc(x.url)}</p></div><div class="actions"><button class="icon-btn edit-art">✎</button><button class="icon-btn del-art">🗑</button></div></div>`).join(""):'<div class="muted">No artworks.</div>';
+ list.querySelectorAll(".edit-art").forEach(b=>b.onclick=()=>{const x=artworks.find(a=>a.id===b.closest(".admin-item").dataset.id);document.getElementById("editId").value=x.id;document.getElementById("fieldType").value=x.type;document.getElementById("fieldUrl").value=x.url;document.getElementById("fieldTitle").value=x.title;document.getElementById("fieldDesc").value=x.description||"";document.getElementById("submitBtn").textContent="Save changes";document.getElementById("cancelEdit").style.display="inline-block";document.querySelector(".admin-panel").scrollTo({top:250,behavior:"smooth"})});
+ list.querySelectorAll(".del-art").forEach(b=>b.onclick=()=>{if(!confirm("Delete this artwork?"))return;artworks=artworks.filter(a=>a.id!==b.closest(".admin-item").dataset.id);save(KEYS.art,artworks);renderGallery();renderAdminList();toast("Artwork deleted");interact()});
+}
+function renderAdminComments(){const box=document.getElementById("adminComments");box.innerHTML=comments.length?comments.slice().reverse().map(c=>`<div class="admin-item"><div class="info"><h4>${esc(c.name)}</h4><p>${esc(c.text)}</p></div><button class="icon-btn del-comment" data-id="${esc(c.id)}">🗑</button></div>`).join(""):'<div class="muted">No comments.</div>';box.querySelectorAll(".del-comment").forEach(b=>b.onclick=()=>{comments=comments.filter(c=>c.id!==b.dataset.id);save(KEYS.comments,comments);renderComments();renderAdminComments();toast("Comment deleted");interact()})}
+
+/* ---------------- Close modals / keyboard ---------------- */
+document.querySelectorAll(".modal-close").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("open"));
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m){m.classList.remove("open");whoosh()}}));
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){document.querySelectorAll(".modal.open").forEach(m=>m.classList.remove("open"));whoosh()}
+ if(lb.classList.contains("open")){if(e.key==="ArrowRight")document.getElementById("lbNext").click();if(e.key==="ArrowLeft")document.getElementById("lbPrev").click()}
+});
+
+/* ---------------- Scroll reveal ---------------- */
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(x=>io.observe(x));
+</script>
+</body>
+</html>
